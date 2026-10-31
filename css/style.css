@@ -287,7 +287,7 @@ a.contact-line:hover { color: var(--green); }
 :root {
   --cream: #f7f5e8;
   --band: #346935;
-  --display: "Aptly", "Barlow Condensed", "Arial Narrow", sans-serif;
+  --display: "aptly-rough", "Barlow Condensed", "Arial Narrow", sans-serif;
   --wave-h: calc(100vw * 59.7 / 1245.59);   /* Höhe der Welle bei voller Breite */
 }
 body { background: var(--cream); }
@@ -361,3 +361,6 @@ h2 { font-family: var(--display); }
   .header-tools { grid-column: 1 / -1; grid-row: 2; justify-self: center; }
   .nav { top: 100%; left: 0; right: 0; }
 }
+
+/* Adobe Fonts: aptly-rough gibt es nur in 400 – kein künstliches Fett */
+.hero-kicker, .hero h1, h2 { font-weight: 400; font-synthesis: none; }
