@@ -474,3 +474,19 @@ h2 { font-family: var(--display); }
 /* Schalter in den Leistungen */
 .season-switch--start { margin: 1.6rem 0 0; }
 @media (max-width: 760px) { .season-switch--start { margin-top: 1.2rem; } }
+
+/* =========================================================
+   HECKEN-ILLUSTRATIONEN (von Jenni) mit Rotkehlchen
+   ========================================================= */
+.hedge-stage { position: relative; aspect-ratio: 219 / 84; width: 100%; margin-top: 3rem; }
+.hedge-img { position: absolute; left: 0; bottom: 0; width: 100%; height: auto; opacity: 0; transform-origin: 50% 100%; transition: opacity .9s ease; animation: hedgeSway 7s ease-in-out infinite; }
+#vogelschutz[data-season="fruehling"] .hedge-img[data-s="fruehling"],
+#vogelschutz[data-season="sommer"] .hedge-img[data-s="sommer"],
+#vogelschutz[data-season="herbst"] .hedge-img[data-s="herbst"],
+#vogelschutz[data-season="winter"] .hedge-img[data-s="winter"] { opacity: 1; }
+@keyframes hedgeSway { 0%, 100% { transform: skewX(0deg); } 50% { transform: skewX(-.6deg); } }
+
+.robin { position: absolute; width: 12%; left: 58%; top: 0; transform: translateY(-52%); overflow: visible; z-index: 2; }
+#vogelschutz[data-season="winter"] .robin { top: 6%; }
+
+@media (prefers-reduced-motion: reduce) { .hedge-img { animation: none; } }
