@@ -490,3 +490,11 @@ h2 { font-family: var(--display); }
 #vogelschutz[data-season="winter"] .robin { top: 6%; }
 
 @media (prefers-reduced-motion: reduce) { .hedge-img { animation: none; } }
+
+/* =========================================================
+   CURSOR: Blatt aus dem Logo (Spitze = Klickpunkt)
+   ========================================================= */
+html, body { cursor: url("../img/cursor-blatt.svg") 10 1, url("../img/cursor-blatt.png") 10 1, auto; }
+a, button, [role="button"], label, summary, .season-switch button {
+  cursor: url("../img/cursor-blatt-gruen.svg") 10 1, url("../img/cursor-blatt-gruen.png") 10 1, pointer !important;
+}
