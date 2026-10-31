@@ -170,10 +170,10 @@ a.contact-line:hover { color: var(--green); }
 }
 
 /* Inhalte je Jahreszeit ein-/ausblenden */
-:root[data-season="fruehling"] [data-season-only]:not([data-season-only="fruehling"]),
-:root[data-season="sommer"]    [data-season-only]:not([data-season-only="sommer"]),
-:root[data-season="herbst"]    [data-season-only]:not([data-season-only="herbst"]),
-:root[data-season="winter"]    [data-season-only]:not([data-season-only="winter"]) { display: none; }
+#leistungen[data-season="fruehling"] [data-season-only]:not([data-season-only="fruehling"]),
+#leistungen[data-season="sommer"] [data-season-only]:not([data-season-only="sommer"]),
+#leistungen[data-season="herbst"] [data-season-only]:not([data-season-only="herbst"]),
+#leistungen[data-season="winter"] [data-season-only]:not([data-season-only="winter"]) { display: none; }
 
 /* Saisonfarben anwenden */
 .hero { background: var(--hero-bg); transition: background-color .8s ease; }
@@ -470,3 +470,7 @@ h2 { font-family: var(--display); }
 .nav a.btn-wave { font-family: var(--display); font-weight: 400; font-size: 1.2rem; letter-spacing: .03em; padding: .85rem 1.7rem; border: 0; color: var(--band); white-space: nowrap; }
 .nav a.btn-wave:hover, .nav a.btn-wave:focus-visible { color: var(--cream); }
 @media (max-width: 860px) { .nav a.btn-wave { margin-top: 1rem; } }
+
+/* Schalter in den Leistungen */
+.season-switch--start { margin: 1.6rem 0 0; }
+@media (max-width: 760px) { .season-switch--start { margin-top: 1.2rem; } }

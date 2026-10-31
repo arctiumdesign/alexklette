@@ -53,17 +53,27 @@
     return m >= 2 && m <= 4 ? 'fruehling' : m >= 5 && m <= 7 ? 'sommer' : m >= 8 && m <= 10 ? 'herbst' : 'winter';
   }
   var realSeason = seasonFromMonth(month);
-  var buttons = document.querySelectorAll('[data-set-season]');
   var periods = document.querySelectorAll('.period');
   var birdSection = document.getElementById('vogelschutz');
+  var serviceSection = document.getElementById('leistungen');
 
-  // Leistungen & Farben der Seite folgen der echten Jahreszeit,
-  // der Schalter wirkt nur auf den Vogelschutz-Abschnitt.
+  // Seite folgt der echten Jahreszeit; die Schalter wirken nur auf ihren Abschnitt.
   root.setAttribute('data-season', realSeason);
+
+  function markButtons(target, s) {
+    document.querySelectorAll('.season-switch[data-for="' + target + '"] [data-set-season]').forEach(function (b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-set-season') === s ? 'true' : 'false');
+    });
+  }
+
+  function setServiceSeason(s) {
+    if (serviceSection) serviceSection.setAttribute('data-season', s);
+    markButtons('leistungen', s);
+  }
 
   function setSeason(s) {
     if (birdSection) birdSection.setAttribute('data-season', s);
-    buttons.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-set-season') === s ? 'true' : 'false'); });
+    markButtons('vogelschutz', s);
 
     // Vogelschutz: aktuellen Zeitraum markieren
     var brut = s === realSeason ? (month >= 2 && month <= 8) : (s === 'fruehling' || s === 'sommer');
@@ -74,8 +84,12 @@
     fx.start(s);
   }
 
-  buttons.forEach(function (b) {
-    b.addEventListener('click', function () { setSeason(b.getAttribute('data-set-season')); });
+  document.querySelectorAll('.season-switch[data-for] [data-set-season]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var s = b.getAttribute('data-set-season');
+      if (b.closest('.season-switch').getAttribute('data-for') === 'leistungen') setServiceSeason(s);
+      else setSeason(s);
+    });
   });
 
   /* ---------- Partikel (Blüten, Pollen, Blätter, Schnee) ---------- */
@@ -193,5 +207,6 @@
     return { start: start };
   })();
 
+  setServiceSeason(realSeason);
   setSeason(realSeason);
 })();

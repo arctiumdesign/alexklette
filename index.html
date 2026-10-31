@@ -86,7 +86,7 @@
   </section>
 
   <!-- LEISTUNGEN -->
-  <section class="section section-light" id="leistungen">
+  <section class="section section-light" id="leistungen" data-season="herbst">
     <div class="wrap">
       <header class="section-head">
         <p class="eyebrow">Leistungen</p>
@@ -95,6 +95,12 @@
         <p class="section-sub" data-season-only="sommer">Lange Tage, schnelles Wachstum: Ich halte Rasen, Hecken und Beete in Form – auch, wenn Sie im Urlaub sind.</p>
         <p class="section-sub" data-season-only="herbst">Laub, Rückschnitt, Wintervorbereitung: Jetzt wird der Garten aufgeräumt und fit für die kalte Jahreszeit gemacht.</p>
         <p class="section-sub" data-season-only="winter">Ruhezeit im Garten – und die richtige Zeit für Gehölzschnitt, kräftigen Heckenrückschnitt und Frostschutz.</p>
+        <div class="season-switch season-switch--section season-switch--start" data-for="leistungen" role="group" aria-label="Leistungen nach Jahreszeit anzeigen">
+          <button type="button" data-set-season="fruehling" aria-pressed="false"><svg><use href="#i-s-fruehling"/></svg><span>Frühling</span></button>
+          <button type="button" data-set-season="sommer" aria-pressed="false"><svg><use href="#i-s-sommer"/></svg><span>Sommer</span></button>
+          <button type="button" data-set-season="herbst" aria-pressed="false"><svg><use href="#i-s-herbst"/></svg><span>Herbst</span></button>
+          <button type="button" data-set-season="winter" aria-pressed="false"><svg><use href="#i-s-winter"/></svg><span>Winter</span></button>
+        </div>
       </header>
 
       <div class="cards" data-season-only="fruehling">
@@ -798,7 +804,7 @@
     <path class="ground" d="M0,312 C70,296 130,322 210,308 C290,294 340,318 420,304 C470,296 500,304 520,302 L520,326 C490,320 460,318 420,326 C340,340 290,316 210,330 C130,344 70,318 0,334 Z"/>
   </svg>
         <p class="switch-label">Die Hecke im Jahreslauf</p>
-        <div class="season-switch season-switch--section" role="group" aria-label="Jahreszeit wählen">
+        <div class="season-switch season-switch--section" data-for="vogelschutz" role="group" aria-label="Jahreszeit der Hecke wählen">
         <button type="button" data-set-season="fruehling" aria-pressed="false" title="Frühling"><svg><use href="#i-s-fruehling"/></svg><span>Frühling</span></button>
         <button type="button" data-set-season="sommer" aria-pressed="false" title="Sommer"><svg><use href="#i-s-sommer"/></svg><span>Sommer</span></button>
         <button type="button" data-set-season="herbst" aria-pressed="false" title="Herbst"><svg><use href="#i-s-herbst"/></svg><span>Herbst</span></button>
