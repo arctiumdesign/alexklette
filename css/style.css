@@ -139,3 +139,144 @@ a.contact-line:hover { color: var(--green); }
   .cards { grid-template-columns: 1fr; }
   .footer-inner { flex-direction: column; text-align: center; }
 }
+
+/* =========================================================
+   JAHRESZEITEN
+   ========================================================= */
+:root,
+:root[data-season="sommer"] {
+  --accent: #366935;
+  --hero-bg: #f6f3e6;
+  --soft: #e9f0e0;
+  --hedge-1: #21421d; --hedge-2: #2c5828; --hedge-3: #3f7535; --hole: #142812;
+}
+:root[data-season="fruehling"] {
+  --accent: #3f7d3a;
+  --hero-bg: #f4f6ee;
+  --soft: #eef3e4;
+  --hedge-1: #2a5524; --hedge-2: #386f30; --hedge-3: #5a944a; --hole: #18301a;
+}
+:root[data-season="herbst"] {
+  --accent: #a4481f;
+  --hero-bg: #f7efe4;
+  --soft: #f3e8da;
+  --hedge-1: #253f1e; --hedge-2: #314f28; --hedge-3: #4b6630; --hole: #172713;
+}
+:root[data-season="winter"] {
+  --accent: #2f5f73;
+  --hero-bg: #eef2f4;
+  --soft: #e5ecf0;
+  --hedge-1: #1f3929; --hedge-2: #284633; --hedge-3: #375b44; --hole: #12221a;
+}
+
+/* Inhalte je Jahreszeit ein-/ausblenden */
+:root[data-season="fruehling"] [data-season-only]:not([data-season-only="fruehling"]),
+:root[data-season="sommer"]    [data-season-only]:not([data-season-only="sommer"]),
+:root[data-season="herbst"]    [data-season-only]:not([data-season-only="herbst"]),
+:root[data-season="winter"]    [data-season-only]:not([data-season-only="winter"]) { display: none; }
+
+/* Saisonfarben anwenden */
+.hero { background: var(--hero-bg); transition: background-color .8s ease; }
+.hero h1 span, .eyebrow { color: var(--accent); transition: color .6s ease; }
+.icon { stroke: var(--accent); transition: stroke .6s ease; }
+.card { transition: transform .25s, box-shadow .25s, background-color .6s; }
+#ueber-mich { background: var(--soft); transition: background-color .8s ease; }
+.section-sub { color: var(--muted); margin-top: -.2rem; }
+.cards[data-season-only] { animation: fadeUp .5s ease both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* Partikel-Ebene */
+.season-fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 40; }
+
+/* Schalter */
+.season-switch { display: flex; gap: 2px; padding: 4px; background: #f0efe9; border-radius: 999px; }
+.season-switch button { display: flex; align-items: center; gap: .4rem; border: 0; background: transparent; color: var(--muted); font: 600 .85rem/1 var(--body); padding: .55rem .8rem; border-radius: 999px; cursor: pointer; transition: background-color .25s, color .25s; }
+.season-switch button:hover { color: var(--ink); }
+.season-switch button[aria-pressed="true"] { background: var(--white); color: var(--accent); box-shadow: 0 2px 6px rgba(0,0,0,.1); }
+.season-switch button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.season-switch svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Vogelschutz */
+#vogelschutz { background: var(--white); }
+.bird-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+.hedge-wrap { position: relative; }
+.hedge { width: 100%; height: auto; display: block; overflow: visible; }
+.hedge .h1 { fill: var(--hedge-1); }
+.hedge .h2 { fill: var(--hedge-2); }
+.hedge .h3 { fill: var(--hedge-3); }
+.hedge .h1, .hedge .h2, .hedge .h3 { transition: fill .8s ease; }
+.hedge .hole { fill: var(--hole); }
+.hedge .ground { fill: var(--ink); }
+.hedge .branch { fill: none; stroke: #5a4330; stroke-width: 4; stroke-linecap: round; }
+.hedge .branch.thin { stroke-width: 2.5; }
+.hedge .leaf { fill: var(--hedge-3); transition: fill .8s ease; }
+.hedge .a1 { fill: #b8522a; } .hedge .a2 { fill: #c98f2c; }
+.hedge .b1 { fill: #fbf3f4; } .hedge .b2 { fill: #e7b84a; }
+.hedge .snow, .hedge .sn { fill: #fbfdff; }
+.season-layer { opacity: 0; transition: opacity .8s ease; }
+:root[data-season="herbst"] .s-herbst,
+:root[data-season="fruehling"] .s-fruehling,
+:root[data-season="winter"] .s-winter { opacity: 1; }
+:root[data-season="herbst"] .hedge .leaf { fill: #c0562a; }
+
+/* Vogel */
+.bird-body { fill: #7b5d43; }
+.bird-wing { fill: #5f4733; }
+.bird-tail { fill: #5f4733; }
+.bird-breast { fill: #dc6b2f; }
+.bird-belly { fill: #efe6da; }
+.bird-beak { fill: #2b2b2b; }
+.bird-eye circle { fill: #171717; }
+.bird-eye .glint { fill: #fff; }
+.bird-legs { fill: none; stroke: #3b2e22; stroke-width: 1.6; stroke-linecap: round; }
+.bird-head { transform-box: fill-box; transform-origin: 70% 90%; animation: headTilt 7s ease-in-out infinite; }
+.bird-eye { transform-box: fill-box; transform-origin: center; animation: blink 5s infinite; }
+.bird-tail { transform-box: fill-box; transform-origin: 0% 50%; animation: tailFlick 6s ease-in-out infinite; }
+.bird-hop { animation: hop 11s ease-in-out infinite; }
+@keyframes headTilt {
+  0%, 18% { transform: rotate(0); }
+  22%, 40% { transform: rotate(-10deg); }
+  46%, 64% { transform: rotate(6deg) translateY(1px); }
+  70%, 100% { transform: rotate(0); }
+}
+@keyframes blink { 0%, 94%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+@keyframes tailFlick { 0%, 80%, 100% { transform: rotate(0); } 84% { transform: rotate(-14deg); } 88% { transform: rotate(4deg); } 92% { transform: rotate(-6deg); } }
+@keyframes hop { 0%, 86%, 100% { transform: translateY(0); } 89% { transform: translateY(-5px); } 92% { transform: translateY(0); } }
+.rustle .leaf { transform-box: fill-box; transform-origin: 0% 50%; animation: rustle 4.5s ease-in-out infinite; }
+.rustle.r2 .leaf { transform-origin: 100% 50%; animation-duration: 5.2s; animation-delay: -1.5s; }
+.rustle.r3 .leaf { animation-duration: 6s; animation-delay: -3s; }
+@keyframes rustle { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-9deg); } }
+
+.periods { list-style: none; margin: 1.6rem 0 1.2rem; padding: 0; display: grid; gap: .8rem; }
+.period { border-radius: var(--radius); padding: 1rem 1.2rem; background: var(--cream); border-left: 4px solid #d8d5ca; transition: background-color .5s, border-color .5s; }
+.period strong { display: block; font-family: var(--head); font-size: 1.25rem; font-weight: 600; }
+.period span { color: var(--muted); }
+.period.current { background: var(--soft); border-left-color: var(--accent); }
+.period.current strong::after { content: "Jetzt"; margin-left: .6rem; font: 600 .7rem/1 var(--body); text-transform: uppercase; letter-spacing: .08em; color: var(--white); background: var(--accent); padding: .3em .6em; border-radius: 999px; vertical-align: middle; }
+.note { font-size: .95rem; color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  .bird-head, .bird-eye, .bird-tail, .bird-hop, .rustle .leaf, .cards[data-season-only] { animation: none; }
+  .season-fx { display: none; }
+}
+
+@media (max-width: 1080px) {
+  .nav { gap: 1.3rem; }
+  .season-switch span { display: none; }
+  .season-switch button { padding: .55rem .65rem; }
+}
+@media (max-width: 900px) {
+  .bird-grid { grid-template-columns: 1fr; }
+  .hedge-wrap { max-width: 520px; }
+}
+@media (max-width: 760px) {
+  .header-inner { flex-wrap: wrap; height: auto; padding: .6rem 0; row-gap: .5rem; }
+  .season-switch { order: 3; width: 100%; justify-content: space-between; }
+  .season-switch button { flex: 1; justify-content: center; }
+  .season-switch span { display: inline; font-size: .8rem; }
+  .nav { top: 100%; }
+  html { scroll-padding-top: 130px; }
+}
+@media (max-width: 380px) {
+  .season-switch span { display: none; }
+}
