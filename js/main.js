@@ -55,9 +55,14 @@
   var realSeason = seasonFromMonth(month);
   var buttons = document.querySelectorAll('[data-set-season]');
   var periods = document.querySelectorAll('.period');
+  var birdSection = document.getElementById('vogelschutz');
+
+  // Leistungen & Farben der Seite folgen der echten Jahreszeit,
+  // der Schalter wirkt nur auf den Vogelschutz-Abschnitt.
+  root.setAttribute('data-season', realSeason);
 
   function setSeason(s) {
-    root.setAttribute('data-season', s);
+    if (birdSection) birdSection.setAttribute('data-season', s);
     buttons.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-set-season') === s ? 'true' : 'false'); });
 
     // Vogelschutz: aktuellen Zeitraum markieren
@@ -88,9 +93,10 @@
     };
     function rnd(a, b) { return a + Math.random() * (b - a); }
 
+    var host = canvas.parentElement, visible = true;
     function resize() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
-      W = window.innerWidth; H = window.innerHeight;
+      W = host.clientWidth; H = host.clientHeight;
       canvas.width = W * dpr; canvas.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
@@ -161,10 +167,18 @@
     function start(s) {
       season = s;
       var c = cfg[s];
-      var n = Math.round(c.n * (W < 700 ? .55 : 1));
+      var n = Math.round(c.n * (W < 700 ? .5 : .8) * Math.max(H / 800, .6));
       parts = [];
       for (var i = 0; i < n; i++) parts.push(make(c, true));
-      if (!raf && !document.hidden) { last = performance.now(); raf = requestAnimationFrame(frame); }
+      if (!raf && !document.hidden && visible) { last = performance.now(); raf = requestAnimationFrame(frame); }
+    }
+    // nur animieren, wenn der Abschnitt sichtbar ist
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) {
+        visible = en[0].isIntersecting;
+        if (!visible) { cancelAnimationFrame(raf); raf = null; }
+        else if (season && !raf && !document.hidden) { last = performance.now(); raf = requestAnimationFrame(frame); }
+      }).observe(host);
     }
 
     resize();
@@ -174,10 +188,10 @@
     });
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) { cancelAnimationFrame(raf); raf = null; }
-      else if (season && !raf) { last = performance.now(); raf = requestAnimationFrame(frame); }
+      else if (season && !raf && visible) { last = performance.now(); raf = requestAnimationFrame(frame); }
     });
     return { start: start };
   })();
 
-  setSeason(root.getAttribute('data-season') || realSeason);
+  setSeason(realSeason);
 })();

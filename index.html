@@ -51,7 +51,6 @@
   </defs>
 </svg>
 
-<canvas class="season-fx" aria-hidden="true"></canvas>
 
 <header class="site-header" id="top">
   <div class="wrap header-inner">
@@ -62,12 +61,6 @@
       <img src="img/logo.svg" alt="Arctium Gartenpflege" width="270" height="115">
     </a>
     <div class="header-tools">
-      <div class="season-switch" role="group" aria-label="Jahreszeit wählen">
-        <button type="button" data-set-season="fruehling" aria-pressed="false" title="Frühling"><svg><use href="#i-s-fruehling"/></svg><span>Frühling</span></button>
-        <button type="button" data-set-season="sommer" aria-pressed="false" title="Sommer"><svg><use href="#i-s-sommer"/></svg><span>Sommer</span></button>
-        <button type="button" data-set-season="herbst" aria-pressed="false" title="Herbst"><svg><use href="#i-s-herbst"/></svg><span>Herbst</span></button>
-        <button type="button" data-set-season="winter" aria-pressed="false" title="Winter"><svg><use href="#i-s-winter"/></svg><span>Winter</span></button>
-      </div>
       <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Menü öffnen">
         <span></span><span></span><span></span>
       </button>
@@ -147,10 +140,10 @@
     </div>
   </section>
 
-  <div class="wave-divider" aria-hidden="true"></div>
-
   <!-- VOGELSCHUTZ -->
   <section class="section" id="vogelschutz">
+    <div class="wave-divider wave-divider--top" aria-hidden="true"></div>
+    <canvas class="season-fx" aria-hidden="true"></canvas>
     <div class="wrap bird-grid">
       <div class="hedge-wrap">
         <svg class="hedge" viewBox="30 70 470 275" role="img" aria-labelledby="hedge-title">
@@ -809,6 +802,13 @@
     <g class="rustle r3" transform="translate(180 112)"><path class="leaf" d="M0,0 C4,-12 14,-14 20,-10 C16,-2 8,2 0,0 Z"/></g>
     <path class="ground" d="M0,312 C70,296 130,322 210,308 C290,294 340,318 420,304 C470,296 500,304 520,302 L520,326 C490,320 460,318 420,326 C340,340 290,316 210,330 C130,344 70,318 0,334 Z"/>
   </svg>
+        <p class="switch-label">Die Hecke im Jahreslauf</p>
+        <div class="season-switch season-switch--section" role="group" aria-label="Jahreszeit wählen">
+        <button type="button" data-set-season="fruehling" aria-pressed="false" title="Frühling"><svg><use href="#i-s-fruehling"/></svg><span>Frühling</span></button>
+        <button type="button" data-set-season="sommer" aria-pressed="false" title="Sommer"><svg><use href="#i-s-sommer"/></svg><span>Sommer</span></button>
+        <button type="button" data-set-season="herbst" aria-pressed="false" title="Herbst"><svg><use href="#i-s-herbst"/></svg><span>Herbst</span></button>
+        <button type="button" data-set-season="winter" aria-pressed="false" title="Winter"><svg><use href="#i-s-winter"/></svg><span>Winter</span></button>
+      </div>
       </div>
       <div>
         <p class="eyebrow">Heckenschnitt mit Rücksicht</p>

@@ -144,25 +144,25 @@ a.contact-line:hover { color: var(--green); }
    JAHRESZEITEN
    ========================================================= */
 :root,
-:root[data-season="sommer"] {
+[data-season="sommer"] {
   --accent: #366935;
   --hero-bg: #f6f3e6;
   --soft: #e9f0e0;
   --hedge-1: #21421d; --hedge-2: #2c5828; --hedge-3: #3f7535; --hole: #142812;
 }
-:root[data-season="fruehling"] {
+[data-season="fruehling"] {
   --accent: #3f7d3a;
   --hero-bg: #f4f6ee;
   --soft: #eef3e4;
   --hedge-1: #2a5524; --hedge-2: #386f30; --hedge-3: #5a944a; --hole: #18301a;
 }
-:root[data-season="herbst"] {
+[data-season="herbst"] {
   --accent: #a4481f;
   --hero-bg: #f7efe4;
   --soft: #f3e8da;
   --hedge-1: #253f1e; --hedge-2: #314f28; --hedge-3: #4b6630; --hole: #172713;
 }
-:root[data-season="winter"] {
+[data-season="winter"] {
   --accent: #2f5f73;
   --hero-bg: #eef2f4;
   --soft: #e5ecf0;
@@ -214,10 +214,10 @@ a.contact-line:hover { color: var(--green); }
 .hedge .b1 { fill: #fbf3f4; } .hedge .b2 { fill: #e7b84a; }
 .hedge .snow, .hedge .sn { fill: #fbfdff; }
 .season-layer { opacity: 0; transition: opacity .8s ease; }
-:root[data-season="herbst"] .s-herbst,
-:root[data-season="fruehling"] .s-fruehling,
-:root[data-season="winter"] .s-winter { opacity: 1; }
-:root[data-season="herbst"] .hedge .leaf { fill: #c0562a; }
+#vogelschutz[data-season="herbst"] .s-herbst,
+#vogelschutz[data-season="fruehling"] .s-fruehling,
+#vogelschutz[data-season="winter"] .s-winter { opacity: 1; }
+#vogelschutz[data-season="herbst"] .hedge .leaf { fill: #c0562a; }
 
 /* Vogel */
 .bird-body { fill: #7b5d43; }
@@ -364,3 +364,62 @@ h2 { font-family: var(--display); }
 
 /* Adobe Fonts: aptly-rust gibt es nur in 400 – kein künstliches Fett */
 .hero-kicker, .hero h1, h2 { font-weight: 400; font-synthesis: none; }
+
+/* Jahreszeiten nur im Vogelschutz-Abschnitt */
+#vogelschutz { position: relative; overflow: hidden; background: var(--hero-bg); transition: background-color .8s ease; }
+#vogelschutz .eyebrow { color: var(--accent); }
+#vogelschutz .wrap { position: relative; z-index: 1; }
+.season-fx { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+.switch-label { text-align: center; font-family: var(--head); font-weight: 600; text-transform: uppercase; letter-spacing: .14em; font-size: .9rem; color: var(--muted); margin: 1.2rem 0 .6rem; }
+.season-switch--section { width: fit-content; margin: 0 auto; background: var(--white); box-shadow: 0 6px 20px -12px rgba(0,0,0,.3); }
+.season-switch--section span { display: inline !important; }
+.season-switch--section button { padding: .6rem 1rem; }
+.season-switch--section button[aria-pressed="true"] { background: var(--accent); color: var(--white); box-shadow: none; }
+@media (max-width: 760px) {
+  .header-tools { grid-column: auto; grid-row: auto; justify-self: end; }
+  .header-inner { row-gap: 0; }
+  .season-switch--section { width: 100%; }
+  .season-switch--section button { flex: 1; justify-content: center; padding: .6rem .4rem; }
+}
+@media (max-width: 380px) { .season-switch--section span { display: none !important; } }
+
+#vogelschutz { background: linear-gradient(to bottom, var(--cream) calc(var(--wave-h) / 2), var(--hero-bg) calc(var(--wave-h) / 2)); padding-top: calc(var(--wave-h) + clamp(3rem, 6vw, 5rem)); }
+.wave-divider--top { position: absolute; top: 0; left: 0; right: 0; z-index: 2; }
+
+/* =========================================================
+   GLAS-LOOK (angelehnt an Apple Liquid Glass)
+   ========================================================= */
+:root {
+  --glass-bg: rgba(255, 255, 255, .52);
+  --glass-bg-strong: rgba(255, 255, 255, .72);
+  --glass-border: rgba(255, 255, 255, .75);
+  --glass-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 -1px 0 rgba(0,0,0,.03) inset, 0 12px 32px -16px rgba(30, 40, 25, .28);
+  --glass-blur: blur(22px) saturate(170%);
+}
+.glass, .period, .card, .contact-box, .season-switch--section, .nav {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+          backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+.card, .period, .contact-box { border-radius: 24px; }
+
+/* Zeiträume: kein Farbstreifen, Hervorhebung über Deckkraft */
+.period { border-left: 1px solid var(--glass-border); padding: 1.1rem 1.3rem; transition: background-color .4s, box-shadow .4s, opacity .4s; }
+.period:not(.current) { opacity: .72; }
+.period.current { background: var(--glass-bg-strong); border-left-color: var(--glass-border); box-shadow: var(--glass-shadow), 0 18px 40px -20px rgba(30,40,25,.35); }
+.period.current strong::after { background: rgba(43,43,43,.82); color: #fff; border-radius: 999px; letter-spacing: .06em; }
+
+/* Karten: ruhiger Hover statt Springen */
+.card:hover { transform: translateY(-2px); background: var(--glass-bg-strong); box-shadow: var(--glass-shadow), 0 20px 44px -22px rgba(30,40,25,.35); }
+
+/* Schalter als Glaspille */
+.season-switch--section { padding: 5px; }
+.season-switch--section button[aria-pressed="true"] { background: rgba(255,255,255,.95); color: var(--ink); box-shadow: 0 2px 10px -2px rgba(0,0,0,.18); }
+.season-switch--section button[aria-pressed="true"] svg { color: var(--accent); }
+
+/* Fallback ohne Blur-Unterstützung */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass, .period, .card, .contact-box, .season-switch--section, .nav { background: rgba(255,255,255,.9); }
+}
