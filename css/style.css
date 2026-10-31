@@ -423,3 +423,50 @@ h2 { font-family: var(--display); }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .glass, .period, .card, .contact-box, .season-switch--section, .nav { background: rgba(255,255,255,.9); }
 }
+
+/* =========================================================
+   HEADER: Logo links, Textlinks, Wellen-Button rechts
+   ========================================================= */
+.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 1.8rem 0 2.6rem; }
+.brand { justify-self: auto; }
+.brand img { width: clamp(150px, 15vw, 210px); }
+.nav-toggle { display: none; }
+.nav { position: static; display: flex; flex-direction: row; align-items: center; gap: 2rem; min-width: 0; padding: 0; background: none; border: 0; box-shadow: none; border-radius: 0; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.nav a:not(.btn-wave) { position: relative; padding: .35rem 0; border: 0; color: var(--ink); text-decoration: none; font-weight: 600; font-size: .98rem; }
+.nav a:not(.btn-wave)::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; border-radius: 2px; background: var(--band); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
+.nav a:not(.btn-wave):hover { color: var(--band); }
+.nav a:not(.btn-wave):hover::after, .nav a:not(.btn-wave):focus-visible::after { transform: scaleX(1); }
+
+/* Button 3 · Welle: grün flutet hoch */
+.btn-wave { position: relative; isolation: isolate; overflow: hidden; display: inline-flex; align-items: center; padding: .95rem 1.7rem; border-radius: 999px; font-weight: 600; font-size: .98rem; color: var(--band); text-decoration: none; box-shadow: inset 0 0 0 2px var(--band); transition: color .35s ease, transform .2s; }
+.btn-wave::before { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 200%; z-index: -1; background: var(--band);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 10'%3E%3Cpath d='M0 6 Q10 0 20 6 T40 6 V10 H0Z'/%3E%3C/svg%3E") 0 0/40px 10px repeat-x, linear-gradient(#000,#000) 0 9px/100% 100% no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 10'%3E%3Cpath d='M0 6 Q10 0 20 6 T40 6 V10 H0Z'/%3E%3C/svg%3E") 0 0/40px 10px repeat-x, linear-gradient(#000,#000) 0 9px/100% 100% no-repeat;
+  animation: btnWelle 1.2s linear infinite; transition: top .55s ease; }
+.btn-wave:hover, .btn-wave:focus-visible { color: var(--cream); }
+.btn-wave:hover::before, .btn-wave:focus-visible::before { top: -40%; }
+.btn-wave:active { transform: scale(.97); }
+.btn-wave:focus-visible { outline: 2px solid var(--band); outline-offset: 3px; }
+@keyframes btnWelle { to { -webkit-mask-position: 40px 0, 0 9px; mask-position: 40px 0, 0 9px; } }
+@media (prefers-reduced-motion: reduce) { .btn-wave::before { animation: none; } }
+
+@media (max-width: 980px) {
+  .nav { gap: 1.3rem; }
+  .nav a:not(.btn-wave) { font-size: .92rem; }
+}
+@media (max-width: 860px) {
+  .header-inner { position: relative; padding: 1.2rem 0 1.8rem; }
+  .nav-toggle { display: block; }
+  .nav { position: absolute; top: 100%; left: 0; right: 0; z-index: 60; display: none; flex-direction: column; align-items: stretch; gap: 0; padding: .6rem 1.2rem 1.2rem; border-radius: 24px;
+         background: var(--glass-bg-strong); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow), 0 20px 40px -20px rgba(0,0,0,.3); }
+  .nav.open { display: flex; }
+  .nav a:not(.btn-wave) { padding: .8rem 0; border-bottom: 1px solid rgba(0,0,0,.06); }
+  .nav a:not(.btn-wave)::after { display: none; }
+  .btn-wave { justify-content: center; margin-top: 1rem; }
+}
+/* Navigation & Button in Aptly Rust */
+.nav a:not(.btn-wave), .btn-wave { font-family: var(--display); font-weight: 400; font-synthesis: none; font-size: 1.2rem; letter-spacing: .03em; }
+@media (max-width: 980px) { .nav a:not(.btn-wave) { font-size: 1.1rem; } }
+.nav a.btn-wave { font-family: var(--display); font-weight: 400; font-size: 1.2rem; letter-spacing: .03em; padding: .85rem 1.7rem; border: 0; color: var(--band); white-space: nowrap; }
+.nav a.btn-wave:hover, .nav a.btn-wave:focus-visible { color: var(--cream); }
+@media (max-width: 860px) { .nav a.btn-wave { margin-top: 1rem; } }
