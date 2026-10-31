@@ -498,3 +498,13 @@ html, body { cursor: url("../img/cursor-blatt.svg") 10 1, url("../img/cursor-bla
 a, button, [role="button"], label, summary, .season-switch button {
   cursor: url("../img/cursor-blatt-gruen.svg") 10 1, url("../img/cursor-blatt-gruen.png") 10 1, pointer !important;
 }
+
+/* Leistungen: Schalter rechts neben der Überschrift, Karten näher dran */
+#leistungen .section-head { max-width: none; display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 3rem; align-items: end; margin-bottom: 1.8rem; }
+#leistungen .section-head > :not(.season-switch) { grid-column: 1; }
+#leistungen .section-head .section-sub { margin-bottom: 0; }
+#leistungen .season-switch--start { grid-column: 2; grid-row: 1 / 4; align-self: end; margin: 0 0 .2rem; }
+@media (max-width: 900px) {
+  #leistungen .section-head { grid-template-columns: minmax(0, 1fr); }
+  #leistungen .season-switch--start { grid-column: 1; grid-row: auto; margin-top: 1.2rem; }
+}
