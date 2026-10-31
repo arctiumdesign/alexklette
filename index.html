@@ -53,24 +53,28 @@
 
 <header class="site-header" id="top">
   <div class="wrap header-inner">
-    <a href="#top" class="brand" aria-label="Arctium Gartenpflege – zur Startseite">
-      <img src="img/logo.svg" alt="Arctium Gartenpflege" width="160" height="68">
+    <a href="#top" class="header-mark" aria-label="Zum Seitenanfang">
+      <img src="img/favicon.svg" alt="" width="109" height="100">
     </a>
-
-    <div class="season-switch" role="group" aria-label="Jahreszeit wählen">
-      <button type="button" data-set-season="fruehling" aria-pressed="false"><svg><use href="#i-s-fruehling"/></svg><span>Frühling</span></button>
-      <button type="button" data-set-season="sommer" aria-pressed="false"><svg><use href="#i-s-sommer"/></svg><span>Sommer</span></button>
-      <button type="button" data-set-season="herbst" aria-pressed="false"><svg><use href="#i-s-herbst"/></svg><span>Herbst</span></button>
-      <button type="button" data-set-season="winter" aria-pressed="false"><svg><use href="#i-s-winter"/></svg><span>Winter</span></button>
+    <a href="#top" class="brand" aria-label="Arctium Gartenpflege – zur Startseite">
+      <img src="img/logo.svg" alt="Arctium Gartenpflege" width="270" height="115">
+    </a>
+    <div class="header-tools">
+      <div class="season-switch" role="group" aria-label="Jahreszeit wählen">
+        <button type="button" data-set-season="fruehling" aria-pressed="false" title="Frühling"><svg><use href="#i-s-fruehling"/></svg><span>Frühling</span></button>
+        <button type="button" data-set-season="sommer" aria-pressed="false" title="Sommer"><svg><use href="#i-s-sommer"/></svg><span>Sommer</span></button>
+        <button type="button" data-set-season="herbst" aria-pressed="false" title="Herbst"><svg><use href="#i-s-herbst"/></svg><span>Herbst</span></button>
+        <button type="button" data-set-season="winter" aria-pressed="false" title="Winter"><svg><use href="#i-s-winter"/></svg><span>Winter</span></button>
+      </div>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-
-    <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Menü öffnen">
-      <span></span><span></span><span></span>
-    </button>
     <nav id="nav" class="nav">
       <a href="#leistungen">Leistungen</a>
       <a href="#vogelschutz">Vogelschutz</a>
       <a href="#ueber-mich">Über mich</a>
+      <a href="#ablauf">Ablauf</a>
       <a href="#kontakt" class="btn btn-small">Anfrage stellen</a>
     </nav>
   </div>
@@ -78,26 +82,17 @@
 
 <main>
 
-  <!-- HERO -->
+  <!-- HERO (nach Figma-Entwurf) -->
   <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-text">
-        <p class="eyebrow">Gartenpflege in Ludwigsfelde &amp; Umgebung</p>
-        <h1>Ihr Garten in<br><span>guten Händen.</span></h1>
-        <p class="lead" data-season-only="fruehling">Der Garten erwacht. Jetzt ist die beste Zeit für Rasenpflege, frische Beete und einen sauberen Start in die Saison.</p>
-        <p class="lead" data-season-only="sommer">Lange Tage, schnelles Wachstum: Ich halte Rasen, Hecken und Beete in Form – auch, wenn Sie im Urlaub sind.</p>
-        <p class="lead" data-season-only="herbst">Laub, Rückschnitt, Wintervorbereitung: Jetzt wird der Garten aufgeräumt und fit für die kalte Jahreszeit gemacht.</p>
-        <p class="lead" data-season-only="winter">Ruhezeit im Garten – und die richtige Zeit für Gehölzschnitt, kräftigen Heckenrückschnitt und Frostschutz.</p>
-        <div class="hero-actions">
-          <a href="#kontakt" class="btn">Kostenlos anfragen</a>
-          <a href="#leistungen" class="btn btn-ghost">Leistungen ansehen</a>
+    <div class="hero-band">
+      <div class="wrap hero-inner">
+        <div class="hero-text">
+          <p class="hero-kicker">Professionell &amp; Persönlich</p>
+          <h1>Ihr Garten in guten Händen</h1>
         </div>
       </div>
-      <figure class="hero-image">
-        <img src="img/heckenschnitt.jpg" alt="Alex beim Schneiden einer hohen Eibenhecke mit der Akku-Heckenschere" width="1400" height="1400">
-      </figure>
+      <img class="hero-photo" src="img/heckenschnitt.jpg" alt="Alex beim Schneiden einer hohen Eibenhecke mit der Akku-Heckenschere" width="1400" height="1400">
     </div>
-    <svg class="hill" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 420,0 720,30 C1000,58 1200,10 1440,36 L1440,80 L0,80 Z"/></svg>
   </section>
 
   <!-- LEISTUNGEN -->
@@ -106,7 +101,10 @@
       <header class="section-head">
         <p class="eyebrow">Leistungen</p>
         <h2>Was im <span data-season-only="fruehling">Frühling</span><span data-season-only="sommer">Sommer</span><span data-season-only="herbst">Herbst</span><span data-season-only="winter">Winter</span> ansteht</h2>
-        <p class="section-sub">Die Leistungen wechseln mit der Jahreszeit – oben können Sie umschalten.</p>
+        <p class="section-sub" data-season-only="fruehling">Der Garten erwacht. Jetzt ist die beste Zeit für Rasenpflege, frische Beete und einen sauberen Start in die Saison.</p>
+        <p class="section-sub" data-season-only="sommer">Lange Tage, schnelles Wachstum: Ich halte Rasen, Hecken und Beete in Form – auch, wenn Sie im Urlaub sind.</p>
+        <p class="section-sub" data-season-only="herbst">Laub, Rückschnitt, Wintervorbereitung: Jetzt wird der Garten aufgeräumt und fit für die kalte Jahreszeit gemacht.</p>
+        <p class="section-sub" data-season-only="winter">Ruhezeit im Garten – und die richtige Zeit für Gehölzschnitt, kräftigen Heckenrückschnitt und Frostschutz.</p>
       </header>
 
       <div class="cards" data-season-only="fruehling">
@@ -146,6 +144,8 @@
       </div>
     </div>
   </section>
+
+  <div class="wave-divider" aria-hidden="true"></div>
 
   <!-- VOGELSCHUTZ -->
   <section class="section" id="vogelschutz">
