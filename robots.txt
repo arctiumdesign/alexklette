@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arctium-gartenpflege.de/sitemap.xml
