@@ -570,3 +570,7 @@ a, button, [role="button"], label, summary, .season-switch button {
   .g-b, .g-c { grid-column: auto; grid-row: span 3; }
   .lb-close { top: 8px; right: 8px; }
 }
+
+/* dezente Textlinks (z. B. zum Vogelschutz) */
+.soft-link { color: inherit; text-decoration: underline; text-decoration-style: dotted; text-decoration-thickness: 1.5px; text-underline-offset: 3px; text-decoration-color: var(--accent); transition: color .2s, text-decoration-color .2s; }
+.soft-link:hover, .soft-link:focus-visible { color: var(--accent); text-decoration-style: solid; }
