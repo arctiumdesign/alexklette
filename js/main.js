@@ -210,3 +210,33 @@
   setServiceSeason(realSeason);
   setSeason(realSeason);
 })();
+
+/* ---------- Vorher/Nachher-Schieberegler ---------- */
+(function () {
+  document.querySelectorAll('.ba-frame').forEach(function (frame) {
+    var range = frame.querySelector('.ba-range');
+    function set(p) {
+      p = Math.max(0, Math.min(100, p));
+      frame.style.setProperty('--pos', p + '%');
+      range.value = Math.round(p);
+      frame.querySelector('.ba-tag--before').style.opacity = p < 12 ? 0 : 1;
+      frame.querySelector('.ba-tag--after').style.opacity = p > 88 ? 0 : 1;
+    }
+    function fromEvent(e) {
+      var r = frame.getBoundingClientRect();
+      set((e.clientX - r.left) / r.width * 100);
+    }
+    range.addEventListener('input', function () { set(+range.value); });
+    // Ziehen mit Maus, Finger oder Stift – vertikales Scrollen bleibt möglich
+    frame.addEventListener('pointerdown', function (e) {
+      frame.classList.add('dragging');
+      fromEvent(e);
+      if (e.pointerType === 'mouse') e.preventDefault();
+      frame.setPointerCapture && frame.setPointerCapture(e.pointerId);
+    });
+    frame.addEventListener('pointermove', function (e) { if (frame.classList.contains('dragging')) fromEvent(e); });
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(function (t) {
+      frame.addEventListener(t, function () { frame.classList.remove('dragging'); });
+    });
+  });
+})();
