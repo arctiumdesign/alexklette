@@ -240,3 +240,20 @@
     });
   });
 })();
+
+/* ---------- Galerie: Großansicht ---------- */
+(function () {
+  var dlg = document.querySelector('.lightbox');
+  if (!dlg || typeof dlg.showModal !== 'function') return;
+  var img = dlg.querySelector('img'), cap = dlg.querySelector('.lb-cap');
+  document.querySelectorAll('.g-item').forEach(function (b) {
+    b.addEventListener('click', function () {
+      img.src = b.getAttribute('data-full');
+      img.alt = b.querySelector('img').alt;
+      cap.innerHTML = b.getAttribute('data-caption');
+      dlg.showModal();
+    });
+  });
+  dlg.querySelector('.lb-close').addEventListener('click', function () { dlg.close(); });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+})();
